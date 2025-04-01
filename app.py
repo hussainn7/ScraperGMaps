@@ -39,7 +39,6 @@ def index():
 
 @app.route('/status')
 def status():
-    # You could implement real-time status updates here
     return jsonify({'status': 'running'})
 
 if __name__ == '__main__':

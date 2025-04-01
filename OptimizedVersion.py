@@ -16,13 +16,13 @@ class RealEstateScraper:
         self.driver_path = driver_path
         self.max_companies = max_companies
         self.output_file = output_file
-        self.inactivity_timeout = inactivity_timeout  # Timeout for inactivity
+        self.inactivity_timeout = inactivity_timeout 
         self.driver = self.setup_driver()
         self.visited_companies = set()
         self.company_count = 0
         self.data = []
         self.logger = self.setup_logger()
-        self.last_activity_time = time.time()  # Track last activity time
+        self.last_activity_time = time.time() 
 
     def setup_driver(self):
         """Initializes the WebDriver and navigates to the URL."""
@@ -126,14 +126,13 @@ class RealEstateScraper:
                     self.logger.info(f"Collected data for {company_info['Name']}")
 
                     if self.company_count >= self.max_companies:
-                        return True  # Stop if we've reached the max company count
+                        return True  
 
-                # Close the company info window if it exists
                 close_button = WebDriverWait(self.driver, 8).until(
                     EC.element_to_be_clickable((By.CLASS_NAME, 'VfPpkd-icon-LgbsSe')))
 
                 close_button.click()
-                time.sleep(1)  # Shorter sleep after closing
+                time.sleep(1) 
                 self.update_last_activity_time()
             except Exception as e:
                 self.logger.error(f"Error handling company click: {e}")
@@ -177,8 +176,7 @@ class RealEstateScraper:
 
             if not companies:
                 self.logger.info("No companies found on the page, scrolling...")
-                # self.scroll_left_list()  # Scroll the left-hand list
-                self.check_inactivity()  # Check for inactivity timeout
+                self.check_inactivity()
                 continue
 
             for comp in companies:
@@ -188,8 +186,7 @@ class RealEstateScraper:
             if self.company_count >= self.max_companies:
                 break
 
-            # self.scroll_left_list()  # Continue scrolling the left-hand list
-            self.check_inactivity()  # Check for inactivity timeout
+            self.check_inactivity() 
 
         self.save_data()
         self.driver.quit()

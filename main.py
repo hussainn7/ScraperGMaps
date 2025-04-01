@@ -22,7 +22,7 @@ class RealEstateScraper:
         self.company_count = 0
         self.data = []
         self.logger = self.setup_logger()
-        self.last_activity_time = time.time()  # Track last activity time
+        self.last_activity_time = time.time() 
 
     def setup_driver(self):
         """Initializes the WebDriver and navigates to the URL."""
@@ -46,7 +46,7 @@ class RealEstateScraper:
     def navigate_to_site(self):
         """Navigate to the starting URL."""
         self.driver.get(
-            "https://www.google.com/maps/@34.1830232,-84.1515008,15z?entry=ttu&g_ep=EgoyMDI0MTAwOC4wIKXMDSoASAFQAw%3D%3D")
+            "https://www.google.com/maps/@40.4975771,-98.2373288,5.86z?entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoASAFQAw%3D%3D")
         self.logger.info("Navigated to Google Maps.")
 
     def search_place(self):
@@ -126,14 +126,13 @@ class RealEstateScraper:
                     self.logger.info(f"Collected data for {company_info['Name']}")
 
                     if self.company_count >= self.max_companies:
-                        return True  # Stop if we've reached the max company count
+                        return True 
 
-                # Close the company info window if it exists
                 close_button = WebDriverWait(self.driver, 8).until(
                     EC.element_to_be_clickable((By.CLASS_NAME, 'VfPpkd-icon-LgbsSe')))
 
                 close_button.click()
-                time.sleep(1)  # Shorter sleep after closing
+                time.sleep(1) 
                 self.update_last_activity_time()
             except Exception as e:
                 self.logger.error(f"Error handling company click: {e}")
@@ -177,8 +176,7 @@ class RealEstateScraper:
 
             if not companies:
                 self.logger.info("No companies found on the page, scrolling...")
-                # self.scroll_left_list()  # Scroll the left-hand list
-                self.check_inactivity()  # Check for inactivity timeout
+                self.check_inactivity() 
                 continue
 
             for comp in companies:
@@ -188,8 +186,7 @@ class RealEstateScraper:
             if self.company_count >= self.max_companies:
                 break
 
-            # self.scroll_left_list()  # Continue scrolling the left-hand list
-            self.check_inactivity()  # Check for inactivity timeout
+            self.check_inactivity()  
 
         self.save_data()
         self.driver.quit()

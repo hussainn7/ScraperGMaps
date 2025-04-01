@@ -15,7 +15,7 @@ chrome_options.binary_location = r'C:\Program Files\Google\Chrome\Application\ch
 service = Service(chrome_driver_path)
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
-driver.get("https://www.google.com/maps/@34.1830232,-84.1515008,15z?entry=ttu&g_ep=EgoyMDI0MTAwOC4wIKXMDSoASAFQAw%3D%3D")
+driver.get("https://www.google.com/maps/@40.4975771,-98.2373288,5.86z?entry=ttu&g_ep=EgoyMDI1MDMyNS4xIKXMDSoASAFQAw%3D%3D")
 
 driver.fullscreen_window()
 
