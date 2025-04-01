@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="form-container">
+            <h2 class="text-center mb-4">Google Maps Scraper</h2>
+            
+            {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" class="needs-validation" novalidate>
+                {{ form.csrf_token }}
+                
+                <div class="mb-3">
+                    {{ form.chromedriver_path.label(class="form-label") }}
+                    {{ form.chromedriver_path(class="form-control", placeholder="e.g., /path/to/chromedriver") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.chrome_path.label(class="form-label") }}
+                    {{ form.chrome_path(class="form-control", placeholder="e.g., /path/to/chrome") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.max_companies.label(class="form-label") }}
+                    {{ form.max_companies(class="form-control") }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.search_query.label(class="form-label") }}
+                    {{ form.search_query(class="form-control") }}
+                </div>
+
+                <div class="d-grid">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    });
+});
+</script>
+{% endblock %}

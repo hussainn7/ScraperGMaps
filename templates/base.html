@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Maps Scraper</title>
+    {{ bootstrap.load_css() }}
+    <style>
+        .container { max-width: 800px; margin-top: 2rem; }
+        .form-container { background: #f8f9fa; padding: 2rem; border-radius: 10px; }
+        .error-message { color: #dc3545; margin-top: 1rem; }
+        .results-table { margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Maps Scraper</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    {{ bootstrap.load_js() }}
+    {% block scripts %}{% endblock %}
+</body>
+</html>
